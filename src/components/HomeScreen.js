@@ -68,22 +68,22 @@ const popularPlaces = [
   {
     title: "Litchina",
     rating: 4.2,
-    image: require("../assets/litch.jpg"),
+    image: require("../../assets/litch.jpg"),
   },
   {
     title: "La Grotte du Chameau",
     rating: 4.2,
-    image: require("../assets/Grottechameau.jpg"),
+    image: require("../../assets/Grottechameau.jpg"),
   },
 ];
 const recommendedPlaces = [
   {
     title: "Cap de l’Eau",
-    image: require("../assets/raslma.jpg"),
+    image: require("../../assets/raslma.jpg"),
   },
   {
     title: "Plage de Marsa Ben M’Hidi",
-    image: require("../assets/BenMhedi.jpg"),
+    image: require("../../assets/BenMhedi.jpg"),
   },
 ];
   return (

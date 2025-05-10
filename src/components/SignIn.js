@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";  
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignIn({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   const handleLogin = async () => {
     setErrors([]);
-
     if (!email || !password) {
       setErrors(["Veuillez remplir tous les champs."]);
       return;
@@ -22,9 +20,7 @@ export default function SignIn({ navigation }) {
     try {
       const response = await fetch("http://localhost:8083/users/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
@@ -32,9 +28,8 @@ export default function SignIn({ navigation }) {
 
       if (response.ok) {
         const { token } = data;
-        console.log(data);
         await AsyncStorage.setItem("token", token);
-        navigation.navigate("HomeScreen"); 
+        navigation.replace("HomeScreen"); // ✅ redirige vers Home après connexion
       } else {
         setErrors([data.message || "Email ou mot de passe incorrect."]);
       }
@@ -46,8 +41,8 @@ export default function SignIn({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Connectez-vous</Text>
-      <Text style={styles.subtitle}>Veuillez vous identifier pour accéder à l'application</Text>
+      <Text style={styles.title}>Connexion</Text>
+      <Text style={styles.subtitle}>Veuillez vous connecter pour accéder à l'application</Text>
 
       {errors.length > 0 && (
         <View style={styles.errorContainer}>
@@ -56,14 +51,13 @@ export default function SignIn({ navigation }) {
           ))}
         </View>
       )}
-      
+
       <TextInput 
         style={styles.input} 
         placeholder="Email" 
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
-        
       />
 
       <View style={styles.passwordContainer}>
@@ -75,11 +69,7 @@ export default function SignIn({ navigation }) {
           onChangeText={setPassword}
         />
         <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-          <Ionicons 
-            name={passwordVisible ? "eye-off" : "eye"} 
-            size={20} 
-            color="gray" 
-          />
+          <Ionicons name={passwordVisible ? "eye-off" : "eye"} size={20} color="gray" />
         </TouchableOpacity>
       </View>
 
