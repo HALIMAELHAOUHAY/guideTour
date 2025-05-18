@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+//test changement 
 
 const Header = ({ onToggleTheme, isDarkMode }) => {
   return (
@@ -41,5 +42,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+ 
 
 export default Header;
